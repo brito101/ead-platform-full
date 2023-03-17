@@ -12,7 +12,7 @@ class Course extends Model
 
     public $incrementing = false;
     protected $keyType = 'uuid';
-    protected $fillable = ['name', 'description', 'image'];
+    protected $fillable = ['name', 'description', 'image', 'available'];
 
     public function modules()
     {

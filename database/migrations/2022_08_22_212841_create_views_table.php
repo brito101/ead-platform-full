@@ -15,10 +15,18 @@ class CreateViewsTable extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->uuid('user_id')->nullable(false);
-            $table->uuid('lesson_id')->nullable(false);
+            $table->uuid('user_id');
+            $table->uuid('lesson_id');
             $table->integer('qty')->default(1);
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+
+            $table->foreign('lesson_id')
+                ->references('id')
+                ->on('lessons');
         });
     }
 
