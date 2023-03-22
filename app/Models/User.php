@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\UuidTrait;
 use App\Notifications\ResetPasswordNotification;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -61,5 +62,10 @@ class User extends Authenticatable
     public function views()
     {
         return $this->hasMany(View::class);
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::make($this->attributes['created_at'])->format('d/m/Y');
     }
 }
