@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreImage;
 use App\Http\Requests\StoreUser;
+use App\Http\Requests\UpdateUser;
+use App\Services\UploadFile;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -54,18 +57,21 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
-    // public function update(UpdateUser $request, $id)
-    // {
-    //     $data = $request->only(['name', 'email']);
-    //     if ($request->password)
-    //         $data['password'] = bcrypt($data['password']);
+    public function update(UpdateUser $request, $id)
+    {
+        if ($request->password) {
+            $data = $request->validated();
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            $data = $request->only(['name', 'email']);
+        }
 
-    //     if (!$this->service->update($id, $data)) {
-    //         return back();
-    //     }
+        if (!$this->service->update($id, $data)) {
+            return back();
+        }
 
-    //     return redirect()->route('users.index');
-    // }
+        return redirect()->route('admin.users.index');
+    }
 
     public function destroy($id)
     {
@@ -82,14 +88,15 @@ class UserController extends Controller
         return view('admin.users.change-image', compact('user'));
     }
 
-    // public function uploadFile(StoreImage $request, UploadFile $uploadFile, $id)
-    // {
-    //     $path = $uploadFile->store($request->image, 'users');
+    public function uploadFile(StoreImage $request, UploadFile $uploadFile, $id)
+    {
 
-    //     if (!$this->service->update($id, ['image' => $path])) {
-    //         return back();
-    //     }
+        $path = $uploadFile->store($request->image, 'users');
 
-    //     return redirect()->route('admin.users.index');
-    // }
+        if (!$this->service->update($id, ['image' => $path])) {
+            return back();
+        }
+
+        return redirect()->route('admin.users.index');
+    }
 }

@@ -12,9 +12,9 @@
         placeholder="E-mail" aria-label="Email" name="email" value="{{ $user->email ?? old('email') }}">
 </div>
 <div class="mt-2">
-    <label class=" block text-sm text-gray-600" for="message">Senha</label>
+    <label class=" block text-sm text-gray-600" for="password">Senha</label>
     <input class="w-full px-5  py-2 text-gray-700 bg-gray-200 rounded" type="password" placeholder="Senha"
-        aria-label="Email" name="password">
+        aria-label="Senha" name="password">
 </div>
 <div class="mt-6">
     <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Enviar</button>
