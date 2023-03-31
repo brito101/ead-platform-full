@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Traits\UuidTrait;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -14,7 +16,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, UuidTrait;
+
+    public $incrementing = false;
+    protected $keyType = 'uuid';
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +30,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
-        'image'
+        'image',
     ];
 
     /**
@@ -48,5 +53,23 @@ class Admin extends Authenticatable
         'id' => 'string',
     ];
 
-    public $incrementing = false;
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function supports()
+    {
+        return $this->hasMany(Support::class);
+    }
+
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return Carbon::make($this->attributes['created_at'])->format('d/m/Y');
+    }
 }

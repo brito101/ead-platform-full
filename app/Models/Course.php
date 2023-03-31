@@ -14,8 +14,13 @@ class Course extends Model
     protected $keyType = 'uuid';
     protected $fillable = ['name', 'description', 'image', 'available'];
 
+    protected $casts = [
+        'id' => 'string',
+    ];
+
     public function modules()
     {
         return $this->hasMany(Module::class);
     }
+
 }

@@ -2,12 +2,26 @@
 
 use App\Http\Controllers\Admin\{
     AdminController,
+    CourseController,
+    DashboardController,
     UserController,
 };
 
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
+
+    /**
+     * Routes Course
+     */
+    Route::resource('/courses', CourseController::class);
+
+    /**
+     * Routes Admin
+     */
+    Route::put('/admins/{id}/update-image', [AdminController::class, 'uploadFile'])->name('admins.update.image');
+    Route::get('/admins/{id}/image', [AdminController::class, 'changeImage'])->name('admins.change.image');
+    Route::resource('/admins', AdminController::class);
 
     /**
      * Routes Users
@@ -22,7 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
-    Route::get('/', [AdminController::class, 'index'])->name('home');
+    Route::get('/', [DashboardController::class, 'index'])->name('home');
 });
 
 Route::get('/', function () {
