@@ -10,7 +10,7 @@
 <div class="flex flex-wrap">
     <div class="w-full my-6 pr-0 lg:pr-2">
         <div class="leading-loose">
-            <form class="p-10 bg-white rounded shadow-xl" action="{{ route('modules.destroy', [$course->id, $module->id]) }}" method="POST">
+            <form class="p-10 bg-white rounded shadow-xl" action="{{ route('admin.modules.destroy', [$course->id, $module->id]) }}" method="POST">
                 <ul>
                     <li><strong>Nome: </strong>{{ $course->name }}</li>
                 </ul>

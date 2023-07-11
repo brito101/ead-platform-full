@@ -6,7 +6,7 @@
 
 <h1 class="text-3xl text-black pb-6">
     Aulas do <i>Módulo <strong>{{ $module->name }}</strong></i>
-    <a href="{{ route('lessons.create', $module->id) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+    <a href="{{ route('admin.lessons.create', $module->id) }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
         <i class="fas fa-plus"></i>
     </a>
 </h1>
@@ -14,7 +14,7 @@
 <div class="w-full mt-12">
 
     @include('admin.includes.form-search', [
-        'routerName' => 'lessons.index',
+        'routerName' => 'admin.lessons.index',
         'params' => $module->id
     ])
 
@@ -65,7 +65,7 @@
                         </div>
                     </td>
                     <td class="px-5 py-2 border-b border-gray-200 bg-white text-sm">
-                        <a href="{{ route('lessons.show', [$module->id, $lesson->id]) }}">
+                        <a href="{{ route('admin.lessons.show', [$module->id, $lesson->id]) }}">
                             <span
                                 class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                 <span aria-hidden
@@ -73,7 +73,7 @@
                                 <span class="relative">Detalhes</span>
                             </span>
                         </a>
-                        <a href="{{ route('lessons.edit', [$module->id, $lesson->id]) }}">
+                        <a href="{{ route('admin.lessons.edit', [$module->id, $lesson->id]) }}">
                             <span
                                 class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                 <span aria-hidden

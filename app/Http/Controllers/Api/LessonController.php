@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreView;
 use App\Http\Resources\LessonResource;
-use App\Repositories\LessonRepository;
+use App\Repositories\Eloquent\LessonRepository;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller

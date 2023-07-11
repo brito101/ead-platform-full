@@ -10,7 +10,7 @@
 <div class="flex flex-wrap">
     <div class="w-full my-6 pr-0 lg:pr-2">
         <div class="leading-loose">
-            <form class="p-10 bg-white rounded shadow-xl" action="{{ route('modules.store', $course->id) }}" method="POST">
+            <form class="p-10 bg-white rounded shadow-xl" action="{{ route('admin.modules.store', ['courseId' => $course->id]) }}" method="POST">
                 @include('admin.courses.modules.partials.form')
             </form>
         </div>

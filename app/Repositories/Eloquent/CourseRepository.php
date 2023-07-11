@@ -14,6 +14,16 @@ class CourseRepository implements CourseRepositoryInterface
         $this->model = $model;
     }
 
+    public function getAllCourses()
+    {
+        return $this->model->with('modules.lessons.views')->get();
+    }
+
+    public function getCourse(string $identify)
+    {
+        return $this->model->with('modules.lessons')->findOrFail($identify);
+    }
+
     public function getAll(string $filter = ''): array
     {
         $admins = $this->model

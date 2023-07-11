@@ -14,7 +14,16 @@ class Lesson extends Model
 
     protected $keyType = 'uuid';
 
-    protected $fillable = ['name', 'description', 'video'];
+    protected $fillable = ['name', 'description', 'video', 'module_id'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'id' => 'string',
+    ];
 
     public function module()
     {

@@ -12,7 +12,17 @@ class Module extends Model
 
     public $incrementing = false;
     protected $keyType = 'uuid';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'course_id'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'id' => 'string',
+    ];
+
 
     public function course()
     {

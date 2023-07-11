@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\{
     AdminController,
     CourseController,
     DashboardController,
+    LessonController,
+    ModuleController,
     UserController,
 };
 
@@ -12,19 +14,30 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->name('admin.')->group(function () {
 
     /**
-     * Routes Course
+     * Lessons
+     */
+    Route::resource('/modules/{moduleId}/lessons', LessonController::class);
+
+
+    /**
+     * Modules
+     */
+    Route::resource('/courses/{courseId}/modules', ModuleController::class);
+
+    /**
+     * Course
      */
     Route::resource('/courses', CourseController::class);
 
     /**
-     * Routes Admin
+     * Admin
      */
     Route::put('/admins/{id}/update-image', [AdminController::class, 'uploadFile'])->name('admins.update.image');
     Route::get('/admins/{id}/image', [AdminController::class, 'changeImage'])->name('admins.change.image');
     Route::resource('/admins', AdminController::class);
 
     /**
-     * Routes Users
+     * Users
      */
     Route::put('/users/{id}/update-image', [UserController::class, 'uploadFile'])->name('users.update.image');
     Route::get('/users/{id}/image', [UserController::class, 'changeImage'])->name('users.change.image');
